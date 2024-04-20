@@ -1,0 +1,48 @@
+﻿@page "/addaccount"
+
+<h3>Register Account</h3>
+
+<EditForm Model="@account">
+    <div class="form-group mb-3">
+        <label for="firstname">Firstname:</label>
+        <InputText id="firstname" class="form-control" @bind-Value="@account.Firstname" required/>
+    </div>
+
+    <div class="form-group my-4">
+        <label for="lastname">Lastname</label>
+        <InputText id="lastname" class="form-control" @bind-Value="@account.Lastname" required/>
+    </div>
+
+    <div class="form-group mb-3">
+        <label for="email">Email</label>
+        <InputText id="email" class="form-control" @bind-Value="@account.Email" required/>
+    </div>
+
+    <div class="form-group mb-3">
+        <label for="password">Password</label>
+        <InputText id="password" class="form-control" @bind-Value="@account.Password" required/>
+    </div>
+
+    <div class="form-group mb-3">
+        <label for="phone">Phone</label>
+        <InputText MaxLength="10" class="form-control" @bind-Value="@account.Phone" />
+    </div>
+
+    <div class="text-center">
+        <button @onclick="RegisterAccount" class="btn btn-primary mb-3">Register</button>
+    </div
+
+</EditForm>
+
+@if (isSaved)
+{
+    <div class="alert alert-info" role="alert">
+        Account with @account.Email was added
+    </div>
+}
+@if (!isValid)
+{
+    <div class="alert alert-info" role="alert">
+        Credentials have not been filled or is not valid
+    </div>
+}

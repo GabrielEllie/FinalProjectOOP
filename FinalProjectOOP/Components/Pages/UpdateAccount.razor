@@ -1,0 +1,42 @@
+﻿@page "/editaccount/{UserId}"
+
+<h1>Update Your Account</h1>
+
+
+<EditForm Model="@account">
+    <div class="form-group mb-3">
+        <label for="firstname">Firstname</label>
+        <InputText id="firstname" class="form-control" @bind-Value="@account.Firstname" />
+    </div>
+
+    <div class="form-group mb-3">
+        <label for="lastname">Lastname</label>
+        <InputText id="lastname" class="form-control" @bind-Value="@account.Lastname" />
+    </div>
+
+    <div class="form-group mb-3">
+        <label for="email">Email</label>
+        <InputText id="email" class="form-control" @bind-Value="@account.Email" />
+    </div>
+
+    <div class="form-group mb-3">
+        <label for="password">Password</label>
+        <InputText id="password" class="form-control" @bind-Value="@account.Password" />
+    </div>
+
+    <div class="form-group mb-3">
+        <label for="phone">Phone</label>
+        <InputText MaxValue="10" id="lastname" class="form-control" @bind-Value="@account.Phone" />
+    </div>
+
+    <div class="text-center">
+        <button @onclick="EditAccount" class="btn btn-primary mb-3">Update Account</button>
+    </div>
+</EditForm>
+
+@if (isSaved)
+{
+    <div class="alert alert-info" role="alert">
+        Account updated
+    </div>
+}

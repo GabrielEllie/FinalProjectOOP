@@ -1,0 +1,84 @@
+﻿@page "/account"
+
+<h1>Account Details</h1>
+<div>
+    <p>First Name: @account.Firstname</p>
+    <p>Last Name: @account.Lastname</p>
+    <p>Email: @account.Email</p>
+    <p>Password: @MaskedPassword</p>
+    <p>Phone Number: @account.Phone</p>
+
+    @if (account.Permission == 0)
+    {
+        <div>
+            <p> </p>
+        <button class="btn btn-primary" @onclick="() => RegisterAccount()">Register Account</button>
+        </div>
+
+        <div>
+            <p> </p>
+        <button class="btn btn-primary" @onclick="() => Login()">Log In</button>
+        </div>
+    }
+    @if (account.Permission >= 1)
+    {
+        <div>
+            <p> </p>
+        <button class="btn btn-primary" @onclick="() => UpdateAccount(account)">Edit Account</button>
+        </div>
+
+        <div>
+            <p> </p>
+            <button class="btn btn-danger" @onclick="() => Logout()">Log Out</button>
+        </div>
+        
+        <div>
+            <p> </p>
+            <button class="btn btn-danger" @onclick="() => DeleteAccount(account)">Delete Account</button>
+        </div>
+    }
+</div>
+
+@if (account.Permission == 1)
+{
+    <p>
+        <p>
+            <p></p>
+        </p>
+    </p>
+    <div>
+        <h3>Borrowed Books</h3>
+    </div>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Start Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in borrowList)
+            {
+                <tr>
+                    <td>@item.Title</td>
+                    <td>@item.Date</td>
+                    <td class="text-center">
+                        <button class="btn btn-warning" @onclick="() => DeleteBorrow(item)">Delete</button>
+                    </td>
+                </tr>
+
+            }
+        </tbody>
+        
+    </table>
+}
+
+
+@if (isDeleted)
+{
+    <div class="alert alert-info" role="alert">
+        Account Deleted
+    </div>
+}
+ 

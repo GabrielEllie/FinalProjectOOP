@@ -1,0 +1,34 @@
+﻿@page "/loginscreen"
+
+<h3>Login Screen</h3>
+
+<EditForm Model="@account">
+
+    <div class="form-group mb-3">
+        <label for="email">Email</label>
+        <InputText id="email" class="form-control" @bind-Value="@account.Email" required/>
+    </div>
+
+    <div class="form-group mb-3">
+        <label for="password">Password</label>
+        <InputText id="password" class="form-control" @bind-Value="@account.Password" required/>
+    </div>
+
+    <div class="text-center">
+        <button @onclick="LoginAccount" class="btn btn-primary mb-3">Login</button>
+    </div
+
+</EditForm>
+
+@if (validLog)
+{
+    <div class="alert alert-info" role="alert">
+        Login Successful
+    </div>
+}
+@if (notValid)
+{
+    <div class="alert alert-info" role="alert">
+        Account with those credentials do not exist
+    </div>
+}

@@ -1,0 +1,81 @@
+﻿@page "/"
+
+<header class="d-flex justify-content-between my-4">
+        <h1>Welcome to the Book Store</h1>
+    @if (account.Permission == 2)
+    {
+        <div class="m-x-0">
+            <NavLink class="btn btn-primary" href="addBook">Add new book</NavLink>
+        </div>
+    }
+</header>
+
+<div>
+    <h5>Filters</h5>
+
+    <label for="filtertitle">Title</label>
+    <div>
+        <input type="checkbox" @bind="@byTitle" />
+        <input @bind="@filteredBook.Title" />
+    </div>
+    
+    <label for="filterauthor">Author</label>
+    <div>
+        <input type="checkbox" @bind="@byAuthor" />
+        <input @bind="@filteredBook.Author" />
+    </div>
+    
+    <label for="filteryear">Year Before</label>
+    <div>
+        <input type="checkbox" @bind="@byYear" />
+        <input  type="number" maxlength=4 @bind="@filteredBook.Year" />
+    </div>
+    
+    <label for="filtercategory">Category</label>
+    <div>
+        <input type="checkbox" @bind="byCategory" />
+        <input @bind="@filteredBook.Category" />
+    </div>
+    <div>
+        <p> </p>
+    </div>
+    <button @onclick="GetFilteredBooks" class="btn btn-primary mb-3">Search Book</button>
+</div>
+
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Category</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var book in books)
+        {
+            <tr>
+                <td>@book.Title</td>
+                <td>@book.Author</td>
+                <td>@book.Category</td>
+                <td class="text-center">
+                    <button class="btn btn-info" @onclick="() => ViewBookDetails(book)">View book</button>
+                    @if (account.Permission == 2)
+                    {
+                        <button class="btn btn-warning" @onclick="() => EditBook(book)">Edit</button>
+                        <button class="btn btn-danger" @onclick="() => DeleteBook(book)">Delete</button>
+                    }
+                    @if (account.Permission == 1)
+                    {
+                        <button class="btn btn-warning" @onclick="() => BorrowBook(book)">Borrow</button>
+                    }
+                </td>
+                
+            </tr>
+            
+            
+        } 
+    </tbody>
+</table>
+

@@ -1,0 +1,26 @@
+﻿@page "/bookdetails/{Isbn}"
+
+<h1>Book details</h1>
+<div>
+    <h5>Isbn</h5>
+    <p>@book.Isbn</p>
+    <h5>Title</h5>
+    <p>@book.Title</p>
+    <h5>Author</h5>
+    <p>@book.Author</p>
+    <h5>Year</h5>
+    <p>@book.Year</p>
+    <h5>Category</h5>
+    <p>@book.Category</p>
+    <h5>About</h5>
+    <p>@book.About</p>
+    @if (account.Permission == 2)
+    {
+        <button class="btn btn-primary" @onclick="() => EditBook(book)">Edit book</button>
+        <button class="btn btn-danger" @onclick="() => DeleteBook(book)">Delete book</button>
+    }
+    @* @if (account.Permission >= 1)
+    {
+        <button class="btn btn-primary" @onclick="() => BorrowBook(book)">Edit book</button>
+    } *@
+</div>
